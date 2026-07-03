@@ -241,8 +241,11 @@ class TerminalView:
                     out.append(bytes([i + 1]))
             if imgui.is_key_pressed(imgui.Key.space):
                 out.append(b"\x00")
-        elif io.key_alt:  # Alt/Option acts as Meta: ESC-prefixed letter (M-b, M-f...)
-            for i in range(26):  # raw letters, ignoring macOS Option composition
+        elif io.key_alt and not io.config_mac_osx_behaviors:
+            # Alt acts as Meta: ESC-prefixed letter (M-b, M-f...). Not on macOS,
+            # where Option is the compose key (|, é, @, {, }...) and the composed
+            # character arrives below via input_queue_characters instead.
+            for i in range(26):
                 if imgui.is_key_pressed(imgui.Key(int(imgui.Key.a) + i)):
                     out.append(b"\x1b" + bytes([ord("a") + i]))
         else:
