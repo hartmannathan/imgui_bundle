@@ -2,6 +2,10 @@
 
 # Unreleased
 
+## musllinux wheels: fixed ImportError
+
+- musllinux (Alpine) wheels could not be imported at all (`Error relocating ...: glPopAttrib: symbol not found`): musl's loader resolves all symbols at import time, and the wheel was missing its libGL link. musllinux wheels are now built without the legacy OpenGL2 python backend (`ImGui_ImplOpenGL2_*` bindings), removing the link-time OpenGL dependency; the OpenGL3 backend is unaffected.
+
 ## Pyodide: switched to Pyodide 314 (Python 3.14); wheels now published on PyPI
 
 - The Pyodide wheel now targets Pyodide 314.x: Python 3.14, Emscripten 5.0.3, wheel tag `cp314-cp314-pyemscripten_2026_0_wasm32`.
