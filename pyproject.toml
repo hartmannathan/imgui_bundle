@@ -252,7 +252,7 @@ archs = ["arm64"]
 #------------------------------------
 [tool.cibuildwheel.linux]
 skip = ["*i686"]
-test-skip = ["*-musllinux_*"] #  issue with OpenGL on musllinux
+#test-skip = ["*-musllinux_*"] #  issue with OpenGL on musllinux
 
 
 # Install glfw dev packages on manylinux:
